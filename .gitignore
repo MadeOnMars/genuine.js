@@ -1,0 +1,32 @@
+# OS-specific
+.DS_Store
+
+# Python
+*.pyc
+
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results
+
+node_modules
+.vagrant
+npm-debug.log
+npm-debug.log.*
+
+.sass-cache
+
+public/css/style.css
+public/css/style.css.map
+
+public/js/main.js
+public/img/*
+!public/img/.gitkeep

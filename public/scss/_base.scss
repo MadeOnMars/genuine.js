@@ -1,0 +1,12 @@
+$primary-color: blue;
+$other-color: pink;
+
+
+ul li{
+  color: $primary-color;
+}
+
+.fun{
+  font-size: 60px;
+  color: $other-color;
+}
