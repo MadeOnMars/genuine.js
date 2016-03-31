@@ -1,7 +1,7 @@
-var express = require('express')
-  , engine = require('ejs-mate')
-  , app     = express()
-  , fs      = require('fs');
+var express = require('express'),
+    engine = require('ejs-mate'),
+    app     = express(),
+    fs      = require('fs');
 
 
 var app_name = "";
