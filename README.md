@@ -1,5 +1,5 @@
 # Genuine.js 1.0.0
-
+![david](https://david-dm.org/codekonami/genuine.js.svg)
 ### Introduction
 
 Genuine.js is a framework for Front End developer to start projects with
