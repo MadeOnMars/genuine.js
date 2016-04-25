@@ -1,2 +1,5 @@
 <% layout('layout') -%>
 500
+<%if(process.env.NODE_env=='development'){%>
+  <%= err %>
+<%}%>

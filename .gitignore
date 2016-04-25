@@ -28,5 +28,3 @@ public/css/style.css
 public/css/style.css.map
 
 public/js/main.js
-public/img/*
-!public/img/.gitkeep

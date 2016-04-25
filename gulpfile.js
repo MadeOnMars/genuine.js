@@ -69,71 +69,100 @@ gulp.task( 'server:start', function() {
 });
 
 var generate = {
-  controller : function(name){
+  controller : function(page, slug, partial, camelCaseName){
     var controllerCode = [
-      'var data = {};',
-      'exports.index = function(req, res) {',
-      '  data.controller = \''+name+'\';',
-      '  data.action = \'index\';',
-      '  res.render(\''+name+'\', {data:data});',
-      '}',
-      ''].join('\n');
+      'exports.'+camelCaseName+' = function(req, res) {',
+      '  data.controller = "pages";',
+      '  data.action = "'+camelCaseName+'";',
+      '  res.render("pages/'+partial+'.ejs", {data:data});',
+      '},',
+    '/* GENUINE */'].join('\n');
 
-    fs.writeFileSync('./controllers/'+name+'.js', controllerCode);
+    fs.readFile('./controllers/pages.js', 'utf8', function (err,data) {
+      if (err) {
+        return console.log(err);
+      }
+      var result = data.replace(/\/\* GENUINE \*\//g, controllerCode);
+
+      fs.writeFile('./controllers/pages.js', result, 'utf8', function (err) {
+         if (err) return console.log(err);
+      });
+    });
   }, // end controller
-  route : function(name){
-    var includeCode = [
-      ', '+name+' = require(\'./controllers/'+name+'\')',
-      '/* GENUINE INCLUDE */'].join('\n');
-
+  route : function(page, slug, partial, camelCaseName){
     var routeCode = [
-      'router.get(\'/'+name+'\', '+name+'.index);',
+      'router.get(\'/'+slug+'\', pages.' + camelCaseName + ');',
       '/* GENUINE ROUTE */'].join('\n');
 
     fs.readFile('./routes.js', 'utf8', function (err,data) {
       if (err) {
         return console.log(err);
       }
-      var result = data.replace(/\/\* GENUINE INCLUDE \*\//g, includeCode);
-      result = result.replace(/\/\* GENUINE ROUTE \*\//g, routeCode);
+      var result = data.replace(/\/\* GENUINE ROUTE \*\//g, routeCode);
 
       fs.writeFile('./routes.js', result, 'utf8', function (err) {
          if (err) return console.log(err);
       });
     });
   },
-  view : function(name){
+  view : function(page, slug, partial, camelCaseName){
     var viewCode = [
       '<% layout(\'layout\') -%>',
-      '<h1>'+name+'</h1>',
+      '<h1>'+page+'</h1>',
       ''].join('\n');
-      fs.writeFileSync('./views/'+name+'.ejs', viewCode);
+    fs.writeFileSync('./views/pages/'+partial+'.ejs', viewCode);
   },
-  script : function(name){
+  script : function(page, slug, partial, camelCaseName){
     var scriptCode = [
-      ''+name+': {',
-      '  init: function() {',
-      '    console.log("'+name+':init");',
-      '    // controller-wide code',
-      '  },',
-      '',
-      '  index: function() {',
-      '    console.log("'+name+':index");',
-      '    // action-specific code',
-      '  }',
+      camelCaseName+': function() {',
+      '  console.log("pages:'+camelCaseName+'");',
+      '  // controller-wide code',
       '},',
-      ''].join('\n');
+    '/* GENUINE */'].join('\n');
+    fs.readFile('./public/js/src/pages.js', 'utf8', function (err,data) {
+      if (err) {
+        return console.log(err);
+      }
+      var result = data.replace(/\/\* GENUINE \*\//g, scriptCode);
 
-    fs.writeFileSync('./public/js/src/'+name+'.js', scriptCode);
+      fs.writeFile('./public/js/src/pages.js', result, 'utf8', function (err) {
+         if (err) return console.log(err);
+      });
+    });
   }
 };
 
 
 gulp.task('add', function () {
-  console.log('Generating : ' + options.route);
-  //TODO Verifying the route variable if it doesn't use a reserved string
-  generate.controller(options.route);
-  generate.route(options.route);
-  generate.view(options.route);
-  generate.script(options.route);
+  if(!options.page||!options.slug||!options.partial){
+    //TODO Verifying the route variable if it doesn't use a reserved string
+    console.log("One or more args are missing. Please give refer to doc.");
+    return;
+  }
+  var camelCaseName = camelCasify(options.partial);
+
+  console.log('Adding a new page.');
+  console.log('Page >>', options.page);
+  console.log('Slug >>', options.slug);
+  console.log('Partial >>', options.partial);
+  console.log('camelCaseName >>', camelCaseName);
+
+  generate.controller(options.page, options.slug, options.partial, camelCaseName);
+  generate.route(options.page, options.slug, options.partial, camelCaseName);
+  generate.view(options.page, options.slug, options.partial, camelCaseName);
+  generate.script(options.page, options.slug, options.partial, camelCaseName);
+
 });
+
+function camelCasify(name){
+  var camelCaseName = name;
+  var partialArr = name.split('-');
+  var i = 1;
+  if(partialArr.length != 1){
+    camelCaseName = partialArr[0];
+    for(i=1;i<partialArr.length;i++){
+      camelCaseName += partialArr[i].charAt(0).toUpperCase() + partialArr[i].slice(1);
+    }
+  }
+  return camelCaseName;
+}

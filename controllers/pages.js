@@ -1,4 +1,6 @@
 var data = {};
+
+/* GENUINE */
 exports.index = function(req, res) {
   data.controller = 'pages';
   data.action = 'index';
