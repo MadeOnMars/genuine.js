@@ -5,15 +5,6 @@ var express = require('express')
 , articles = require('./controllers/articles')
 , pages = require('./controllers/pages');
 
-router.use(function(req, res, next) {
-    next();
-});
-router.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-
-
 router.get('/', pages.index);
 router.get('/articles', articles.index);
 /* GENUINE ROUTE */
