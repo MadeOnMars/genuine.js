@@ -56,10 +56,10 @@ So add this host below on your guest OS to see the website :
 
 ### Documentation
 
-We added a simple command that generate a route/page automatically like this :
+We added a simple command that generate a page automatically like this :
 
 ```bash
-gulp add --route about
+gulp add --page 'Mentions Légales' --slug mentions-legales --partial mentions-legales
 ```
 This will generate the route, the controller file, the view file and even the js functions
 to be able to develop right away.
