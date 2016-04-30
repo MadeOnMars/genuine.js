@@ -1,25 +1,18 @@
-var express = require('express')
-, router = express.Router()
-, data = {}
-/* GENUINE INCLUDE */
-, pages = require('./controllers/pages');
+var express = require('express'),
+    router = express.Router(),
+    /* GENUINE INCLUDE */
+    pages = require('./controllers/pages');
 
 router.get('/', pages.index);
 /* GENUINE ROUTE */
 
-
-
-/*
-** This should be the last route since it's the 404
-*/
 router.use(function(req, res, next) {
-  res.render('404', {data:data});
+  res.status(404).render('404', {data:{}});
 });
 
 router.use(function(err, req, res, next) {
-  res.status(500);
-  res.render('error', { error: err, data:data });
+  console.error(err);
+  res.status(500).render('error', { data: {err: err}});
 });
-
 
 module.exports = router

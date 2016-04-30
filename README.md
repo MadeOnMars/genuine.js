@@ -23,36 +23,18 @@ npm install
 
 #### How to launch
 
-The app depends on some ENV variables.
+First you need to create a local-config.js file to declare your local ENV vars.
 
-To launch the app on dev mode
 ```bash
-export NODE_env=development
+cp local-config-sample.js local-config.js
 ```
 
-To choose the port (by default 3000)
+Now you can launch the project like so
 ```bash
-export NODE_ENV_dev_port=3002
-```
-Example
-```bash
-NODE_env=development NODE_ENV_dev_port=3002 gulp server
+gulp server
 ```
 
-Now you can browse to http://localhost:3002 and see the result
-
-### Features
-
-### Demo
-
-### Vagrant
-
-I love Vagrant. I've added a Vagrantfile and a bootstrap.sh which will generate everything you need.
-The default IP is 172.28.128.49 and the nginx waits for a www.genuine.com.
-
-So add this host below on your guest OS to see the website :
-
-172.28.128.49 www.genuine.com
+You can browse to http://localhost:3000 and see the result
 
 ### Documentation
 
@@ -76,6 +58,6 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
-- If the route added through **gulp add --route somethings** finishes with an 's'
-you can suppose that it will need some fake data coming from an API. So it will need
-to copy/paste the articles.json for example.
+- Add multi languages
+- Review the gulp method
+- Generate nav automatically

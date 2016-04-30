@@ -9,6 +9,12 @@ var express = require('express'),
     }));
 
 socket.listen(io);
+app.locals.locals = require('./locals');
+/*
+app.locals.config = function(){
+  return config.public;
+}
+*/
 app.engine('ejs', engine);
 app.set('views',__dirname + '/views');
 app.set('view engine', 'ejs');
