@@ -58,6 +58,6 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
-- Add multi languages
 - Review the gulp method
-- Generate nav automatically
+- gulp if no local-config.js generate it automatically
+- if require error tell people to do a npm install

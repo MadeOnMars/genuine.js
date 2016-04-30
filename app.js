@@ -1,7 +1,10 @@
 var express = require('express'),
+    session = require('express-session'),
     config = require('./local-config'),
     engine = require('ejs-mate'),
     _ = require('lodash'),
+    i18n = require('i18n-2'),
+    acceptLanguage = require('accept-language'),
     socket = require('./socket'),
     app     = express(),
     io = require('socket.io').listen(app.listen(config.port, function(){
@@ -9,18 +12,15 @@ var express = require('express'),
     }));
 
 socket.listen(io);
+acceptLanguage.languages(config.locales);
+i18n.expressBind(app, {locales: config.locales});
+
 app.locals.locals = require('./locals');
-/*
-app.locals.config = function(){
-  return config.public;
-}
-*/
 app.engine('ejs', engine);
 app.set('views',__dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
-app.use(function(req,res,next){
-  req.io = io;
-  next();
-});
+app.use(session({ secret: config.secret, resave: true, saveUninitialized: true }));
+app.use(require('./modules/lang'));
+app.use(function(req,res,next){req.io = io;next();});
 app.use(require('./routes'));
