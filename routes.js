@@ -2,11 +2,9 @@ var express = require('express')
 , router = express.Router()
 , data = {}
 /* GENUINE INCLUDE */
-, articles = require('./controllers/articles')
 , pages = require('./controllers/pages');
 
 router.get('/', pages.index);
-router.get('/articles', articles.index);
 /* GENUINE ROUTE */
 
 

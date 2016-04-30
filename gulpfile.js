@@ -15,6 +15,9 @@ var knownOptions = {
 var serverFiles = [
     './app.js',
     './controllers/*.js',
+    './gulpfile.js',
+    './local-config.js',
+    './socket.js',
     './routes.js'
 ];
 

@@ -23,3 +23,5 @@ UTIL = {
 };
 
 $( document ).ready( UTIL.init );
+
+var socket = io.connect();
