@@ -28,6 +28,8 @@
     "gulp-develop-server": "^0.4.3",
     "gulp-livereload": "^3.8.0",
     "gulp-sass": "^2.0.4",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "reserved-words": "^0.1.1",
+    "slug": "^0.9.1"
   }
 }

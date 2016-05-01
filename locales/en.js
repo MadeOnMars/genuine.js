@@ -1,5 +1,6 @@
 {
 	"Bananas": "Bananas",
 	"Hello": "Hello",
-	"Apple": "Apple"
+	"Apple": "Apple",
+	"Banana": "Banana"
 }

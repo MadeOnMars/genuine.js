@@ -3,7 +3,7 @@ pages: {
     console.log("pages:init");
     // controller-wide code
   },
-  /* GENUINE */
+/* GENUINE */
   index: function() {
     console.log("pages:index");
     // action-specific code

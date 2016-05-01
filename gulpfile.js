@@ -7,14 +7,13 @@ var livereload = require('gulp-livereload');
 var server = require( 'gulp-develop-server' );
 var minimist = require('minimist');
 var fs = require('fs');
-
-var knownOptions = {
-  string: ['route', 'controller']
-};
+var slug = require('slug');
+var reserved = require('reserved-words');
 
 var serverFiles = [
     './app.js',
     './controllers/*.js',
+    './data/*.js',
     './gulpfile.js',
     './local-config.js',
     './socket.js',
@@ -22,7 +21,7 @@ var serverFiles = [
     './routes.js'
 ];
 
-var options = minimist(process.argv.slice(2), knownOptions);
+var args = minimist(process.argv.slice(2));
 
 gulp.task('default', ['sass', 'js', 'sass:watch', 'ejs:watch', 'js:watch']);
 gulp.task('server', ['sass', 'js', 'server:start', 'sass:watch', 'ejs:watch', 'js:watch'], function() {
@@ -109,20 +108,42 @@ var generate = {
       });
     });
   },
+  data: function(page, slug, partial, camelCaseName){
+    var dataCode = [
+      '{',
+      '"title": "' + page + '",',
+      '"slug": "' + slug + '",',
+      '"partial": "' + partial + '",',
+      '"camel": "' + camelCaseName + '"',
+      '},',
+      '/* GENUINE DATA */'
+    ].join('\n');
+
+    fs.readFile('./data/pages.js', 'utf8', function (err, data) {
+      if (err) {
+        return console.log(err);
+      }
+      var result = data.replace(/\/\* GENUINE DATA \*\//g, dataCode);
+
+      fs.writeFile('./data/pages.js', result, 'utf8', function (err) {
+         if (err) return console.log(err);
+      });
+    });
+  },
   view : function(page, slug, partial, camelCaseName){
     var viewCode = [
-      '<% layout(\'layout\') -%>',
-      '<h1>'+page+'</h1>',
+      '<h2>'+page+'</h2>',
+      '<p>Add your content here</p>',
       ''].join('\n');
-    fs.writeFileSync('./views/pages/'+partial+'.ejs', viewCode);
+    fs.writeFileSync('./views/pages/elements/'+partial+'.ejs', viewCode);
   },
   script : function(page, slug, partial, camelCaseName){
     var scriptCode = [
       camelCaseName+': function() {',
       '  console.log("pages:'+camelCaseName+'");',
       '  // controller-wide code',
-      '},',
-    '/* GENUINE */'].join('\n');
+      '  },',
+      '  /* GENUINE */'].join('\n');
     fs.readFile('./public/js/src/pages.js', 'utf8', function (err,data) {
       if (err) {
         return console.log(err);
@@ -138,23 +159,38 @@ var generate = {
 
 
 gulp.task('add', function () {
-  if(!options.page||!options.slug||!options.partial){
-    //TODO Verifying the route variable if it doesn't use a reserved string
-    console.log("One or more args are missing. Please give refer to doc.");
+  if(!args.page){
+    console.log('The arg --page is missing. Please refer to the doc.');
     return;
   }
-  var camelCaseName = camelCasify(options.partial);
+  if(!args.slug&&!args.partial){
+    args.slug = slug(args.page).toLowerCase();
+    args.partial = slug(args.page).toLowerCase();
+  } else if(!args.slug&&args.partial){
+    args.slug = slug(args.page).toLowerCase();
+  } else if(args.slug&&!args.partial){
+    args.partial = args.slug;
+  }
+  if(    reserved.check(args.page, '5')
+  || reserved.check(args.slug, '5')
+  || reserved.check(args.partial, '5')
+  ){
+    console.log('You used a reserved word. Please change the name.');
+    return;
+  }
+  var camelCaseName = camelCasify(args.partial);
 
   console.log('Adding a new page.');
-  console.log('Page >>', options.page);
-  console.log('Slug >>', options.slug);
-  console.log('Partial >>', options.partial);
+  console.log('Page >>', args.page);
+  console.log('Slug >>', args.slug);
+  console.log('Partial >>', args.partial);
   console.log('camelCaseName >>', camelCaseName);
 
-  generate.controller(options.page, options.slug, options.partial, camelCaseName);
-  generate.route(options.page, options.slug, options.partial, camelCaseName);
-  generate.view(options.page, options.slug, options.partial, camelCaseName);
-  generate.script(options.page, options.slug, options.partial, camelCaseName);
+  //generate.controller(args.page, args.slug, args.partial, camelCaseName);
+  //generate.route(args.page, args.slug, args.partial, camelCaseName);
+  generate.data(args.page, args.slug, args.partial, camelCaseName);
+  generate.view(args.page, args.slug, args.partial, camelCaseName);
+  generate.script(args.page, args.slug, args.partial, camelCaseName);
 
 });
 

@@ -41,10 +41,15 @@ You can browse to http://localhost:3000 and see the result
 We added a simple command that generate a page automatically like this :
 
 ```bash
-gulp add --page 'Mentions Légales' --slug mentions-legales --partial mentions-legales
+gulp add --page 'About us'
 ```
-This will generate the route, the controller file, the view file and even the js functions
+This will generate the route **about-us**, the partial view file **about-us.ejs** and even the js functions
 to be able to develop right away.
+
+You decide which slug and filename you want to use. Just do this:
+```bash
+gulp add --page 'About us' --slug about --partial about-file
+```
 
 For the rest, since it's built on top of Express.js you should check the Express doc.
 
@@ -58,6 +63,10 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
-- Review the gulp method
+- Add resize function
+- Add prod min js and style and versionning caching
+- Add some caching
+- Add a nginx optimized nginx
+- Add Dockerfile
 - gulp if no local-config.js generate it automatically
 - if require error tell people to do a npm install

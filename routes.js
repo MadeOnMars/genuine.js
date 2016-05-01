@@ -5,6 +5,8 @@ var express = require('express'),
 
 router.get('/', pages.index);
 /* GENUINE ROUTE */
+router.get('/:slug', pages.page);
+
 
 router.use(function(req, res, next) {
   res.status(404).render('404', {data:{}});
