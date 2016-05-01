@@ -1,4 +1,4 @@
-# Genuine.js 1.0.1
+# Genuine.js 1.1.0
 ![david](https://david-dm.org/codekonami/genuine.js.svg)
 ### Introduction
 
@@ -23,46 +23,33 @@ npm install
 
 #### How to launch
 
-The app depends on some ENV variables.
+First you need to create a local-config.js file to declare your local ENV vars.
 
-To launch the app on dev mode
 ```bash
-export NODE_env=development
+cp local-config-sample.js local-config.js
 ```
 
-To choose the port (by default 3000)
+Now you can launch the project like so
 ```bash
-export NODE_ENV_dev_port=3002
-```
-Example
-```bash
-NODE_env=development NODE_ENV_dev_port=3002 gulp server
+gulp server
 ```
 
-Now you can browse to http://localhost:3002 and see the result
-
-### Features
-
-### Demo
-
-### Vagrant
-
-I love Vagrant. I've added a Vagrantfile and a bootstrap.sh which will generate everything you need.
-The default IP is 172.28.128.49 and the nginx waits for a www.genuine.com.
-
-So add this host below on your guest OS to see the website :
-
-172.28.128.49 www.genuine.com
+You can browse to http://localhost:3000 and see the result
 
 ### Documentation
 
 We added a simple command that generate a page automatically like this :
 
 ```bash
-gulp add --page 'Mentions Légales' --slug mentions-legales --partial mentions-legales
+gulp add --page 'About us'
 ```
-This will generate the route, the controller file, the view file and even the js functions
+This will generate the route **about-us**, the partial view file **about-us.ejs** and even the js functions
 to be able to develop right away.
+
+You decide which slug and filename you want to use. Just do this:
+```bash
+gulp add --page 'About us' --slug about --partial about-file
+```
 
 For the rest, since it's built on top of Express.js you should check the Express doc.
 
@@ -76,6 +63,10 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
-- If the route added through **gulp add --route somethings** finishes with an 's'
-you can suppose that it will need some fake data coming from an API. So it will need
-to copy/paste the articles.json for example.
+- Add prod min js and style and versionning caching
+- Add some caching
+- Add a nginx optimized nginx
+- Add Dockerfile
+- gulp if no local-config.js generate it automatically
+- if require error tell people to do a npm install
+- Add sitemap.xml, rss, robots.txt, favicon, meta graph and twitter

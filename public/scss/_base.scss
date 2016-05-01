@@ -1,7 +1,9 @@
 $primary-color: blue;
 $other-color: pink;
 
-
+.logo img {
+  width: 100px;
+}
 ul li{
   color: $primary-color;
 }

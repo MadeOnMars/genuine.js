@@ -2,17 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Genuine.js</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <title>
+      Genuine.js | <%= data.title || 'The best Framework like ever' %>
+    </title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var config = <%- JSON.stringify(locals.config) %>;
+    </script>
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body data-controller="<%= data.controller || ''%>" data-action="<%= data.action || ''%>">
+    <%- partial('header/header') %>
     <%- body -%>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-    <%if(process.env.NODE_env=='development'){%>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+    <script src="/js/main.js"></script>
+    <%if(locals.config.env == 'dev'){%>
       <script src="http://localhost:35729/livereload.js"></script>
     <%}%>
   </body>
