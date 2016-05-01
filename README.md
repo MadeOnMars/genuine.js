@@ -63,7 +63,6 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
-- Add resize function
 - Add prod min js and style and versionning caching
 - Add some caching
 - Add a nginx optimized nginx
