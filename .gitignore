@@ -24,6 +24,8 @@ npm-debug.log.*
 
 .sass-cache
 
+local-config.js
+
 public/css/style.css
 public/css/style.css.map
 
