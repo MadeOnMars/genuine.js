@@ -24,6 +24,7 @@ exports.page = function(req, res) {
     return;
   }
   data.action = page.camel;
+  data.title = page.title;
   data.page = page;
   res.render('pages/page', {data:data});
 }
