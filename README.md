@@ -69,4 +69,4 @@ The solution is actually to open the developer mode.
 - Add Dockerfile
 - gulp if no local-config.js generate it automatically
 - if require error tell people to do a npm install
-- Add sitemap.xml, rss, robots.txt, favicon, meta graph and twitter
+- Add sitemap.xml, rss, favicon, meta graph and twitter
