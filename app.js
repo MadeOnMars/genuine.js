@@ -22,5 +22,5 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(session({ secret: config.secret, resave: true, saveUninitialized: true }));
 app.use(require('./utils/lang'));
-app.use(function(req,res,next){req.io = io;next();});
+app.use(function(req,res,next){req.io = io;app.locals.lang = req.lang;next();});
 app.use(require('./routes'));

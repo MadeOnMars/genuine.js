@@ -22,6 +22,7 @@ router.use(function(req, res, next) {
       }
     }
   }
+  req.lang = req.i18n.getLocale();
   next();
 });
 
