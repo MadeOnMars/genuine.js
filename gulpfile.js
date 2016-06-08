@@ -1,5 +1,4 @@
 'use strict';
-
 var gulp = require('gulp');
 var cleanCSS = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
@@ -87,7 +86,18 @@ gulp.task('js:watch', function () {
 });
 
 gulp.task( 'server:start', function() {
-    server.listen( { path: './app.js' }, livereload.listen );
+    try {
+      // Check if the local-config.js file exists
+      // Otherwise it creates it
+      stats = fs.lstatSync('./local-config.js');
+    }
+    catch (e) {
+      fs.createReadStream('./local-config-sample.js').pipe(fs.createWriteStream('local-config.js'));
+    }
+    server.listen( { path: './app.js' }, function(err){
+        if(err){console.log('********************\nDo a \n`npm install`\n********************'); return;}
+        livereload.listen;
+    });
 });
 
 var generate = {

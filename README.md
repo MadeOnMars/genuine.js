@@ -63,12 +63,7 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
-- Add prod min js and style and versionning caching
-- Add some caching
-- Add a nginx optimized nginx
 - Add Dockerfile
-- gulp if no local-config.js generate it automatically
-- if require error tell people to do a npm install
 - Add sitemap.xml, rss, favicon, meta graph and twitter
 - Meta description optimisation
 - Add new gulp stuff

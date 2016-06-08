@@ -22,6 +22,8 @@ app.engine('ejs', engine);
 app.set('views',__dirname + '/views');
 app.set('view engine', 'ejs');
 if(config.env == 'prod'){
+  app.set('view cache', true);
+  app.set('x-powered-by', false);
   app.use(compression());
 }
 app.use(express.static(__dirname + '/public'));
