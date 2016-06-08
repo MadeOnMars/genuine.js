@@ -1,6 +1,9 @@
 'use strict';
 
 var gulp = require('gulp');
+var cleanCSS = require('gulp-clean-css');
+var uglify = require('gulp-uglify');
+var stripDebug = require('gulp-strip-debug');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var livereload = require('gulp-livereload');
@@ -24,6 +27,7 @@ var serverFiles = [
 var args = minimist(process.argv.slice(2));
 
 gulp.task('default', ['sass', 'js', 'sass:watch', 'ejs:watch', 'js:watch']);
+gulp.task('prod', ['minify-css', 'minify-js']);
 gulp.task('server', ['sass', 'js', 'server:start', 'sass:watch', 'ejs:watch', 'js:watch'], function() {
     function restart( file ) {
         server.changed( function( error ) {
@@ -38,6 +42,21 @@ gulp.task('sass', function () {
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./public/css'))
     .pipe(livereload());
+});
+
+gulp.task('minify-css', function() {
+  gulp.src('./public/scss/style.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(gulp.dest('./public/css'));
+});
+
+gulp.task('minify-js', function() {
+  gulp.src(['./public/js/src/genuine/header.js', './public/js/src/*.js', './public/js/src/genuine/footer.js'])
+    .pipe(concat('main.js'))
+    .pipe(stripDebug())
+    .pipe(uglify())
+    .pipe(gulp.dest('./public/js'));
 });
 
 gulp.task('sass:watch', function () {
@@ -158,7 +177,7 @@ var generate = {
 };
 
 
-gulp.task('add', function () {
+gulp.task('page', function () {
   if(!args.page){
     console.log('The arg --page is missing. Please refer to the doc.');
     return;
@@ -193,6 +212,30 @@ gulp.task('add', function () {
   generate.script(args.page, args.slug, args.partial, camelCaseName);
 
 });
+
+gulp.task('generate', function () {
+  if(!args.type){
+    console.log('The arg --type is missing. Please refer to the doc.');
+    return;
+  }
+  // Create a type.js empty in data
+  // Create a type.js empty in controllers
+  // Two functions index => for all the data routes in index.ejs
+  // elements => for each one of the data page
+  // Create a type folder in views/
+  // Create a type.ejs file in views/type/
+  // Create a elements folder in views/type/
+  // Create a index.ejs in views/type/elements
+  // Add include in routes.js
+  // Add two routes /type => index function
+  // /type/:slug => elements function
+  console.log(args.type);
+});
+
+// gulp task 'add' will add the routes ... like for page but for other one too
+// command gulp add --type TYPE will a data etc..
+// you should be able to enter --type page
+// by default gulp add without type => page
 
 function camelCasify(name){
   var camelCaseName = name;
