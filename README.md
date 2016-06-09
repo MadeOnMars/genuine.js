@@ -96,8 +96,8 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
-- Add sitemap.xml, rss
+- Add rss
 - Generate Nav automatically
 - Automatic plan du site
-- Add production README explaination
+- Add production README explanation
 - Add Dockerfile
