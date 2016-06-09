@@ -236,7 +236,7 @@ var generate = {
       "<h1>"+type+"</h1>",
       "<%-partial('elements/'+data.item.partial)%>",
     ""].join('\n');
-    fs.writeFileSync('./views/'+ type +'/'+ type +'.js', render);
+    fs.writeFileSync('./views/'+ type +'/'+ type +'.ejs', render);
   },
   viewElement : function(element, type){
     var render = [
