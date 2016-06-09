@@ -137,6 +137,29 @@ var generate = {
       });
     });
   },
+  routeType : function(type){
+    var includeRender = [
+      type + " = require('./controllers/"+type+"');",
+      "/* GENUINE INCLUDE */",
+    ""].join('\n');
+    var routesRender = [
+      "router.get('/"+type+"', "+type+".index);",
+      "router.get('/"+type+"/:slug', "+type+".elements);",
+      "/* GENUINE ROUTE */",
+    ""].join('\n');
+
+    fs.readFile('./routes.js', 'utf8', function (err,data) {
+      if (err) {
+        return console.log(err);
+      }
+      var result = data.replace(/\/\* GENUINE ROUTE \*\//g, routesRender);
+      result = data.replace(/\/\* GENUINE INCLUDE \*\//g, includeRender);
+
+      fs.writeFile('./routes.js', result, 'utf8', function (err) {
+         if (err) return console.log(err);
+      });
+    });
+  },
   data: function(page, slug, partial, camelCaseName){
     var dataCode = [
       '{',
@@ -158,6 +181,67 @@ var generate = {
          if (err) return console.log(err);
       });
     });
+  },
+  dataFile : function(type){
+    var render = [
+    'var '+type+' = [',
+    '/* GENUINE DATA */',
+    '];',
+    'module.exports = '+type+';',
+    ''].join('\n');
+    fs.writeFileSync('./data/'+type+'.js', render);
+  },
+  controllerFile : function(type){
+    var render = [
+      "var data = {};",
+      "var items = require('../data/"+type+"');",
+      "var config = require('../local-config');",
+      "var _ = require('lodash');",
+      "var i18n = new (require('i18n-2'))({",
+      "    locales: config.locales",
+      "});",
+      "",
+      "data.controller = '"+type+"';",
+      "",
+      "exports.index = function(req, res) {",
+      "  i18n.setLocale(req.lang);",
+      "  data.action = 'index';",
+      "  res.render('"+type+"/"+type+"', {data:data});",
+      "},",
+      "exports.elements = function(req, res) {",
+      "  i18n.setLocale(req.lang);",
+      "  var item = _.find(items, {route: req.params.slug});",
+      "  if(item === undefined){",
+      "    res.status(404).render('404', {data:data});",
+      "    return;",
+      "  }",
+      "  data.controller = 'formation';",
+      "  data.action = item.action || 'index';",
+      "  data.item = item;",
+      "  data.title = item.title;",
+      "  data.url = req.url;",
+      "  data.description = item.title + ' | ' + item.description;",
+      "  res.render('"+type+"/"+type+"', {data:data});",
+      "}",
+    ""].join('\n');
+    fs.writeFileSync('./controllers/'+type+'.js', render);
+  },
+  viewFiles : function(type){
+    fs.mkdirSync('./views/' + type);
+    fs.mkdirSync('./views/' + type + '/elements');
+    var render = [
+      "<% layout('layout') -%>",
+      "<h1>"+type+"</h1>",
+      "<%-partial('elements/'+data.item.partial)%>",
+    ""].join('\n');
+    fs.writeFileSync('./views/'+ type +'/'+ type +'.js', render);
+  },
+  viewElement : function(element, type){
+    var render = [
+      '<h2>'+element+'</h2>',
+      '<p>Add your content here</p>',
+      ''].join('\n');
+    fs.writeFileSync('./views/'+type+'/elements/'+element+'.ejs', render);
   },
   view : function(page, slug, partial, camelCaseName){
     var viewCode = [
@@ -228,18 +312,21 @@ gulp.task('generate', function () {
     console.log('The arg --type is missing. Please refer to the doc.');
     return;
   }
-  // Create a type.js empty in data
-  // Create a type.js empty in controllers
-  // Two functions index => for all the data routes in index.ejs
-  // elements => for each one of the data page
-  // Create a type folder in views/
-  // Create a type.ejs file in views/type/
-  // Create a elements folder in views/type/
-  // Create a index.ejs in views/type/elements
-  // Add include in routes.js
-  // Add two routes /type => index function
-  // /type/:slug => elements function
-  console.log(args.type);
+
+  if(reserved.check(args.type, '5')){
+    console.log('You used a reserved word. Please change the type name.');
+    return;
+  }
+
+  console.log('Adding a new type.');
+  console.log('Type >>', args.type);
+
+  generate.dataFile(args.type);
+  generate.controllerFile(args.type);
+  generate.viewFiles(args.type);
+  generate.viewElement('index', args.type);
+  generate.routeType(args.type);
+
 });
 
 // gulp task 'add' will add the routes ... like for page but for other one too

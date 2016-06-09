@@ -63,9 +63,9 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
-- Add sitemap.xml, rss, favicon, meta graph and twitter
-- Meta description optimisation
 - Add new gulp stuff
+- Add sitemap.xml, rss, meta graph and twitter
+- Meta description optimisation
 - Automatic plan du site
 - Add production README explaination
 - Add Dockerfile
