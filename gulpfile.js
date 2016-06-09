@@ -212,13 +212,12 @@ var generate = {
       "},",
       "exports.elements = function(req, res) {",
       "  i18n.setLocale(req.lang);",
-      "  var item = _.find(items, {route: req.params.slug});",
+      "  var item = _.find(items, {slug: req.params.slug});",
       "  if(item === undefined){",
       "    res.status(404).render('404', {data:data});",
       "    return;",
       "  }",
-      "  data.controller = 'formation';",
-      "  data.action = item.action || 'index';",
+      "  data.action = item.camel || 'index';",
       "  data.item = item;",
       "  data.title = item.title;",
       "  data.url = req.url;",
@@ -268,7 +267,7 @@ var generate = {
       ''].join('\n');
     fs.writeFileSync('./views/'+type+'/elements/'+partial+'.ejs', viewCode);
   },
-  script : function(tpye, page, slug, partial, camelCaseName){
+  script : function(type, page, slug, partial, camelCaseName){
     var scriptCode = [
       camelCaseName+': function() {',
       '  console.log("'+type+':'+camelCaseName+'");',
@@ -370,7 +369,7 @@ gulp.task('add', function () {
   }
   var camelCaseName = camelCasify(args.partial);
 
-  console.log('Adding a new element to ' + args.type);
+  console.log('Adding a new element to ' + type);
   console.log('Page name >>', args.name);
   console.log('Slug >>', args.slug);
   console.log('Partial >>', args.partial);
@@ -378,9 +377,9 @@ gulp.task('add', function () {
 
   //generate.controller(args.page, args.slug, args.partial, camelCaseName);
   //generate.route(args.page, args.slug, args.partial, camelCaseName);
-  generate.data(args.type, args.name, args.slug, args.partial, camelCaseName);
-  generate.view(args.type, args.name, args.slug, args.partial, camelCaseName);
-  generate.script(args.type, args.name, args.slug, args.partial, camelCaseName);
+  generate.data(type, args.name, args.slug, args.partial, camelCaseName);
+  generate.view(type, args.name, args.slug, args.partial, camelCaseName);
+  generate.script(type, args.name, args.slug, args.partial, camelCaseName);
 
 });
 

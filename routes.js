@@ -3,10 +3,12 @@ var express = require('express'),
     config = require('./local-config'),
     router = express.Router(),
 /* GENUINE INCLUDE */
+
     pages = require('./controllers/pages');
 
 router.get('/', pages.index);
 /* GENUINE ROUTE */
+
 
 router.get('/robots.txt', function(req, res){
   res.writeHead(200, {"Content-Type": "text/plain"});
