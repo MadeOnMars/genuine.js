@@ -96,8 +96,7 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
-- Add sitemap.xml, rss, meta graph and twitter
-- Meta description optimisation
+- Add sitemap.xml, rss
 - Generate Nav automatically
 - Automatic plan du site
 - Add production README explaination
