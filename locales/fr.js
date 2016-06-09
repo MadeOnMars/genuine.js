@@ -2,5 +2,6 @@
 	"Bananas": "Bananes",
 	"Hello": "Bonjour",
 	"Apple": "Pomme",
-	"Banana": "Banane"
+	"Banana": "Banane",
+	"Blueberries": "Blueberries"
 }

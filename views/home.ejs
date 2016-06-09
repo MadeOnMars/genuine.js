@@ -1,11 +1,25 @@
 <% layout('layout') -%>
-<h1 class='fun' ><%= __('Hello')%></h1>
-<div class="row">
-  <ul>
-    <li><%= data.fruit %></li>
-    <li>Oranges</li>
-    <li><%= __('Bananas')%></li>
-    <li>Melon</li>
-    <li>Blueberries</li>
-  </ul>
+<%- partial('home/slide') %>
+<div class="bodycontainer">
+  <h1 class='fun' ><%= __('Hello')%></h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet convallis libero. In scelerisque eros id vehicula aliquet. Duis convallis lacus et venenatis feugiat. Vestibulum iaculis nec arcu non tempor. Sed interdum est at ex mattis tempor. In viverra ligula quam, sit amet rhoncus quam vehicula nec. Fusce venenatis ut justo sit amet mollis. Donec vel erat et lorem euismod rhoncus sed ac leo. In ullamcorper nec massa a mollis. Ut hendrerit leo sit amet sollicitudin suscipit.</p>
+  <br/>
+  <div class="colcontainer">
+    <div class="col col1of3 aligncenter">
+      <h2><%= data.fruit %></h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet convallis libero.</p><br/>
+      <a href="/" class="btn">Button</a>
+    </div>
+    <div class="col col1of3 aligncenter">
+      <h2>Oranges</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet convallis libero.</p><br/>
+      <a href="/" class="btn">Button</a>
+    </div>
+    <div class="col col1of3 aligncenter">
+      <h2><%= __('Blueberries')%></h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet convallis libero.</p><br/>
+      <a href="/" class="btn">Button</a>
+    </div>
+  </div>
 </div>
+<%- partial('home/grid') %>
