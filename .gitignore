@@ -27,6 +27,9 @@ npm-debug.log.*
 local-config.js
 
 public/css/style.css
+public/css/style.min.css
 public/css/style.css.map
+public/css/style.min.css.map
 
 public/js/main.js
+public/js/main.min.js

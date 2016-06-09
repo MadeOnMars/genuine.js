@@ -1,21 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= lang || 'en' %>">
   <head>
     <meta charset="utf-8">
     <title>
-      Genuine.js | <%= data.title || 'The best Framework like ever' %>
+      <%= data.title || locals.config.title %>
     </title>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var config = <%- JSON.stringify(locals.config) %>;
     </script>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css<%= (locals.config.env == 'prod') ? '?'+locals.version : '' %>">
+    <meta name="description" content="<%= data.description || locals.config.description %>">
+    <meta property="og:url" content="<%= locals.config.host %><%= data.url || '' %>">
+    <meta property="og:site_name" content="<%= data.description || locals.config.description %>">
+    <meta property="og:title" content="<%= data.title || locals.config.title %>">
+    <meta property="og:description" content="<%= data.description || locals.config.description %>">
+    <meta property="og:image" content="<%= (data.shareImg) || (locals.config.host + '/img/logo.png') %>">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="twitter:site" content="LyceeLaTouche">
+    <meta property="twitter:creator" content="LyceeLaTouche">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="<%= data.title || locals.config.title %>">
+    <meta property="twitter:description" content="<%= data.description || locals.config.description %>">
+    <meta property="twitter:image:src" content="<%= (data.shareImg) || (locals.config.host + '/img/logo.png') %>">
+    <meta property="twitter:image:width" content="1200">
+    <meta property="twitter:image:height" content="630">
   </head>
   <body data-controller="<%= data.controller || ''%>" data-action="<%= data.action || ''%>">
     <%- partial('header/header') %>
     <%- body -%>
     <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/main.js<%= (locals.config.env == 'prod') ? '?'+locals.version : '' %>"></script>
     <%if(locals.config.env == 'dev'){%>
       <script src="http://localhost:35729/livereload.js"></script>
     <%}%>
