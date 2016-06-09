@@ -206,6 +206,7 @@ var generate = {
       "exports.index = function(req, res) {",
       "  i18n.setLocale(req.lang);",
       "  data.action = 'index';",
+      "  data.item = {};",
       "  data.item.partial = 'index';",
       "  res.render('"+type+"/"+type+"', {data:data});",
       "},",
