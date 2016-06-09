@@ -139,7 +139,7 @@ var generate = {
   },
   routeType : function(type){
     var includeRender = [
-      type + " = require('./controllers/"+type+"');",
+      type + " = require('./controllers/"+type+"'),",
       "/* GENUINE INCLUDE */",
     ""].join('\n');
     var routesRender = [
@@ -153,7 +153,7 @@ var generate = {
         return console.log(err);
       }
       var result = data.replace(/\/\* GENUINE ROUTE \*\//g, routesRender);
-      result = data.replace(/\/\* GENUINE INCLUDE \*\//g, includeRender);
+      result = result.replace(/\/\* GENUINE INCLUDE \*\//g, includeRender);
 
       fs.writeFile('./routes.js', result, 'utf8', function (err) {
          if (err) return console.log(err);
@@ -206,6 +206,7 @@ var generate = {
       "exports.index = function(req, res) {",
       "  i18n.setLocale(req.lang);",
       "  data.action = 'index';",
+      "  data.item.partial = 'index';",
       "  res.render('"+type+"/"+type+"', {data:data});",
       "},",
       "exports.elements = function(req, res) {",

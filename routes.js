@@ -1,6 +1,6 @@
 var express = require('express'),
     router = express.Router(),
-    /* GENUINE INCLUDE */
+/* GENUINE INCLUDE */
     pages = require('./controllers/pages');
 
 router.get('/', pages.index);
