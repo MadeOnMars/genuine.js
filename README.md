@@ -38,18 +38,51 @@ You can browse to http://localhost:3000 and see the result
 
 ### Documentation
 
+#### Add a page
+
 We added a simple command that generate a page automatically like this :
 
 ```bash
-gulp add --page 'About us'
+gulp page --name 'About us'
 ```
 This will generate the route **about-us**, the partial view file **about-us.ejs** and even the js functions
 to be able to develop right away.
 
 You decide which slug and filename you want to use. Just do this:
 ```bash
-gulp add --page 'About us' --slug about --partial about-file
+gulp page --name 'About us' --slug about --partial about-file
 ```
+
+#### Add a content type
+
+Content type will basically be your menu sections. Let's say you are doing a website for a restaurant. There is plenty of chance that you will need a "Menus" category with all your entries.
+
+So do generate all the things for this new content type just type :
+
+```bash
+gulp generate --type 'menus'
+#The type should only be letters. No '-' or '_'
+```
+
+Then do add you new entries, it's pretty similar to pages
+
+```bash
+gulp add --type 'menus' --name 'King Menu' --slug king-menu --partial king-menu
+```
+
+In fact 'Pages' is a content type too so if you do a :
+
+```bash
+gulp add --type 'pages' --name 'About us' --slug about --partial about-file
+```
+
+It will do the exact same thing that a :
+
+```bash
+gulp page --name 'About us' --slug about --partial about-file
+```
+
+Everything should make sense now, right?
 
 For the rest, since it's built on top of Express.js you should check the Express doc.
 
@@ -63,9 +96,9 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
-- Add new gulp stuff
 - Add sitemap.xml, rss, meta graph and twitter
 - Meta description optimisation
+- Generate Nav automatically
 - Automatic plan du site
 - Add production README explaination
 - Add Dockerfile
