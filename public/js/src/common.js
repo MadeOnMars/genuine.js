@@ -30,5 +30,11 @@ common: {
       $( ".modaloverlay, .modalclose" ).click(function() {
         $(".modal").removeClass( "open" );
       });
+      $('.toggleTitle').click(function() {
+        $(this).addClass('open');
+        $(this).next(".toggleContent").show("slow");
+        $('.toggleTitle').not(this).removeClass('open');
+        $('.toggleTitle').not(this).next(".toggleContent").hide("slow");
+      });
     }
   },
