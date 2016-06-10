@@ -24,5 +24,11 @@ common: {
           $(".header nav").addClass( "dropopen" );
         });
       }
+      $( ".modalbtn" ).click(function() {
+        $(".modal").toggleClass( "open" );
+      });
+      $( ".modaloverlay, .modalclose" ).click(function() {
+        $(".modal").removeClass( "open" );
+      });
     }
   },
