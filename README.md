@@ -96,6 +96,7 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
+- Add Bower for taking care or js client libs
 - Add rss
 - Generate Nav automatically
 - Automatic plan du site
