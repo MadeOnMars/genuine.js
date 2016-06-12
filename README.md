@@ -1,4 +1,4 @@
-# Genuine.js 1.2.0
+# Genuine.js 1.2.1
 ![david](https://david-dm.org/codekonami/genuine.js.svg)
 ### Introduction
 
@@ -96,6 +96,7 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
+- Add Bower for taking care or js client libs
 - Add rss
 - Generate Nav automatically
 - Automatic plan du site

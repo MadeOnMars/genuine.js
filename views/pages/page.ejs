@@ -1,3 +1,8 @@
 <% layout('layout') -%>
-<h1>Page</h1>
+<div class="pageHead">
+  <div class="bodycontainer">
+    <h1><%= data.page.title || 'Page' %></h1>
+    <%- partial('../breadcrumb') %>
+  </div>
+</div>
 <%-partial('elements/'+data.page.partial)%>
