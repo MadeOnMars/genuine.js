@@ -11,6 +11,8 @@ data.controller = 'pages';
 /* GENUINE */
 exports.index = function(req, res) {
   i18n.setLocale(req.lang);
+  delete data.title;
+  delete data.description;
   data.action = 'index';
   data.fruit = req.session.fruit || i18n.__('Apple');
   req.session.fruit = i18n.__('Banana');
