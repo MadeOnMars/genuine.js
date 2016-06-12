@@ -2,8 +2,8 @@
 <%- partial('home/slide') %>
 <div class="bodycontainer">
   <h1 class='fun' ><%= __('Hello')%></h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet convallis libero. In scelerisque eros id vehicula aliquet. Duis convallis lacus et venenatis feugiat. Vestibulum iaculis nec arcu non tempor. Sed interdum est at ex mattis tempor. In viverra ligula quam, sit amet rhoncus quam vehicula nec. Fusce venenatis ut justo sit amet mollis. Donec vel erat et lorem euismod rhoncus sed ac leo. In ullamcorper nec massa a mollis. Ut hendrerit leo sit amet sollicitudin suscipit.</p>
-  <br/>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet convallis libero. In scelerisque eros id vehicula aliquet. Duis convallis lacus et venenatis feugiat. Vestibulum iaculis nec arcu non tempor. Sed interdum est at ex mattis tempor. In viverra ligula quam, sit amet rhoncus quam vehicula nec. Fusce venenatis ut justo sit amet mollis. Donec vel erat et lorem euismod rhoncus sed ac leo. In ullamcorper nec massa a mollis. Ut hendrerit leo sit amet sollicitudin suscipit. <a href="javascript:void(0)" class="modalbtn">> Open modal</a></p>
+  <br/><br/>
   <div class="colcontainer">
     <div class="col col1of3 aligncenter">
       <h2><%= data.fruit %></h2>
@@ -21,5 +21,30 @@
       <a href="/" class="btn">Button</a>
     </div>
   </div>
+  <br/><br/>
+  <div class="toggleContainer">
+    <h3 class="toggleTitle open">Toogle 01</h3>
+    <div class="toggleContent">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet convallis libero. In scelerisque eros id vehicula aliquet. Duis convallis lacus et venenatis feugiat. Vestibulum iaculis nec arcu non tempor.</p>
+    </div>
+    <h3 class="toggleTitle">Toogle 02</h3>
+    <div class="toggleContent" style="display:none;">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet convallis libero. In scelerisque eros id vehicula aliquet. Duis convallis lacus et venenatis feugiat. Vestibulum iaculis nec arcu non tempor.</p>
+    </div>
+    <h3 class="toggleTitle">Toogle 03</h3>
+    <div class="toggleContent" style="display:none;">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet convallis libero. In scelerisque eros id vehicula aliquet. Duis convallis lacus et venenatis feugiat. Vestibulum iaculis nec arcu non tempor.</p>
+    </div>
+  </div>
 </div>
 <%- partial('home/grid') %>
+<div class="modal">
+  <div class="modalcontainer">
+    <div class="modaloverlay"></div>
+    <div class="modalclose"></div>
+    <div class="modalbox">
+      <h3>Modal content</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet convallis libero. In scelerisque eros id vehicula aliquet. Duis convallis lacus et venenatis feugiat. Vestibulum iaculis nec arcu non tempor.</p>
+    </div>
+  </div>
+</div>
