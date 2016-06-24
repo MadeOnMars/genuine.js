@@ -19,7 +19,7 @@ var serverFiles = [
     './gulpfile.js',
     './local-config.js',
     './socket.js',
-    './locals.js',
+    './utils/*',
     './routes.js'
 ];
 
