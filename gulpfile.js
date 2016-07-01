@@ -1,5 +1,6 @@
 'use strict';
 var gulp = require('gulp');
+var merge = require('merge-stream');
 var cleanCSS = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
 var stripDebug = require('gulp-strip-debug');
@@ -11,6 +12,8 @@ var minimist = require('minimist');
 var fs = require('fs');
 var slug = require('slug');
 var reserved = require('reserved-words');
+var concatCss = require('gulp-concat-css');
+var stripCssComments = require('gulp-strip-css-comments');
 
 var serverFiles = [
     './app.js',
@@ -44,14 +47,22 @@ gulp.task('sass', function () {
 });
 
 gulp.task('minify-css', function() {
-  gulp.src('./public/scss/style.scss')
-    .pipe(sass().on('error', sass.logError))
+  var sassStream,
+        cssStream;
+  sassStream = gulp.src('./public/scss/style.scss')
+    .pipe(sass().on('error', sass.logError));
+
+  cssStream = gulp.src('./public/css/vendors/*');
+
+  merge(sassStream, cssStream)
+    .pipe(concatCss('./style.css'))
+    .pipe(stripCssComments())
     .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest('./public/css'));
 });
 
 gulp.task('minify-js', function() {
-  gulp.src(['./public/js/src/genuine/header.js', './public/js/src/*.js', './public/js/src/genuine/footer.js'])
+  gulp.src(['./public/js/vendors/*', './public/js/src/genuine/header.js', './public/js/src/*.js', './public/js/src/genuine/footer.js'])
     .pipe(concat('main.js'))
     .pipe(stripDebug())
     .pipe(uglify())
