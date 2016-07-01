@@ -6,7 +6,6 @@
       <%= data.title || locals.config.title %>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="/socket.io/socket.io.js"></script>
     <script>
       var config = <%- JSON.stringify(locals.config) %>;
     </script>
@@ -36,6 +35,7 @@
     <%- partial('header/header') %>
     <%- body -%>
     <%- partial('footer/footer') %>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
     <script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
