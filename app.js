@@ -1,5 +1,6 @@
 var express = require('express'),
     session = require('express-session'),
+    bodyParser = require('body-parser'),
     compression = require('compression'),
     config = require('./local-config'),
     pkg = require ('./package.json'),
@@ -27,6 +28,8 @@ if(config.env == 'prod'){
   app.use(compression());
 }
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(session({ secret: config.secret, resave: true, saveUninitialized: true }));
 app.use(require('./utils/lang'));
 app.use(function(req,res,next){req.io = io;app.locals.lang = req.lang;next();});

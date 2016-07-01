@@ -1,5 +1,6 @@
 var express = require('express'),
     sitemap = require('./utils/sitemap'),
+    rss = require('./utils/rss'),
     config = require('./local-config'),
     router = express.Router(),
 /* GENUINE INCLUDE */
@@ -21,6 +22,8 @@ router.get('/robots.txt', function(req, res){
 });
 
 router.get('/sitemap.xml', sitemap);
+router.get('/rss', rss);
+router.get('/rss.xml', rss);
 
 router.get('/:slug', pages.page);
 

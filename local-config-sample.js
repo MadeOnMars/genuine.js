@@ -5,7 +5,11 @@ var config = {
   locales: ['en', 'fr'],
   title: 'Genuine.js | The best Framework like ever',
   description: 'A really light Node.js framework, focused on making awesome and fast websites.',
-  host: 'http://locahost:3000'
+  host: 'http://locahost:3000',
+  s3: {
+    active: false,
+    url: 'https://s3-eu-west-1.amazonaws.com/yourbucket'
+  }
 };
 
 config.public = {
