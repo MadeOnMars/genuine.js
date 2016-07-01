@@ -38,12 +38,6 @@
     <%- body -%>
     <%- partial('footer/footer') %>
     <script src="/socket.io/socket.io.js"></script>
-    <%if(locals.config.env != 'prod'){%>
-      <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
-      <script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/sharer.js/latest/sharer.min.js"></script>
-    <%}%>
     <script src="/js/main.js<%= (locals.config.env == 'prod') ? '?'+locals.version : '' %>"></script>
     <%if(locals.config.env == 'dev'){%>
       <script src="http://localhost:35729/livereload.js"></script>

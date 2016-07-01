@@ -14,6 +14,7 @@ var slug = require('slug');
 var reserved = require('reserved-words');
 var concatCss = require('gulp-concat-css');
 var stripCssComments = require('gulp-strip-css-comments');
+var gulpBrowser = require("gulp-browser");
 
 var serverFiles = [
     './app.js',
@@ -61,14 +62,6 @@ gulp.task('minify-css', function() {
     .pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('minify-js', function() {
-  gulp.src(['./public/js/vendors/*', './public/js/src/genuine/header.js', './public/js/src/*.js', './public/js/src/genuine/footer.js'])
-    .pipe(concat('main.js'))
-    .pipe(stripDebug())
-    .pipe(uglify())
-    .pipe(gulp.dest('./public/js'));
-});
-
 gulp.task('sass:watch', function () {
   livereload.listen();
   gulp.watch('./public/scss/**/*.scss', ['sass']);
@@ -87,8 +80,18 @@ gulp.task('ejs:watch', function () {
 gulp.task('js', function () {
   gulp.src(['./public/js/src/genuine/header.js', './public/js/src/*.js', './public/js/src/genuine/footer.js'])
     .pipe(concat('main.js'))
-    .pipe(gulp.dest('./public/js'))
+    .pipe(gulpBrowser.browserify())
+    .pipe(gulp.dest('./public/js/'))
     .pipe(livereload());
+});
+
+gulp.task('minify-js', function() {
+  gulp.src(['./public/js/src/genuine/header.js', './public/js/src/*.js', './public/js/src/genuine/footer.js'])
+    .pipe(concat('main.js'))
+    .pipe(gulpBrowser.browserify())
+    .pipe(stripDebug())
+    .pipe(uglify())
+    .pipe(gulp.dest('./public/js'));
 });
 
 gulp.task('js:watch', function () {

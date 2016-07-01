@@ -96,7 +96,7 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
-- Add Bower for taking care or js client libs
+- Find a way to manage css dependencies
 - Generate Nav automatically
 - Automatic plan du site
 - Add production README explanation
