@@ -1,3 +1,4 @@
+proxy_cache_path /home/path/to/cache levels=1:2 keys_zone=STATIC:75m inactive=24h max_size=512m;
 server {
     listen 80;
     server_name subdomain.example.com;
@@ -24,20 +25,34 @@ server {
     error_log /path/to/error.log;
 
     location /img {
-      root /path/to/project/public/img;
+      alias /path/to/project/public/img;
+      expires 30d;
+      add_header Pragma public;
+      add_header Cache-Control "public";
+    }
+
+    location /favicon.ico {
+      alias /path/to/project/public/favicon.ico;
+      expires 30d;
+      add_header Pragma public;
+      add_header Cache-Control "public";
     }
 
     location /css {
-      root /path/to/project/public/css;
+      alias /path/to/project/public/css;
+      expires 30d;
+      add_header Pragma public;
+      add_header Cache-Control "public";
     }
 
     location /js {
-      root /path/to/project/public/js;
+      alias /path/to/project/public/js;
+      expires 30d;
+      add_header Pragma public;
+      add_header Cache-Control "public";
     }
 
     location / {
-        # Edit /etc/nginx/nginx.conf and add the line below
-        # proxy_cache_path /home/nginx/cache levels=1:2 keys_zone=STATIC:10m inactive=24h max
         proxy_cache STATIC;
         proxy_cache_valid 200 60m;
         proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
