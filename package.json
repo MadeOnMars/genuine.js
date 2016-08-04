@@ -34,6 +34,7 @@
     "swiper": "^3.3.1"
   },
   "devDependencies": {
+    "browserify": "^13.1.0",
     "gulp": "^3.9.0",
     "gulp-browser": "^2.1.9",
     "gulp-clean-css": "^2.0.10",
@@ -42,12 +43,14 @@
     "gulp-develop-server": "^0.4.3",
     "gulp-livereload": "^3.8.0",
     "gulp-sass": "^2.0.4",
+    "gulp-streamify": "^1.0.2",
     "gulp-strip-css-comments": "^1.2.0",
     "gulp-strip-debug": "^1.1.0",
     "gulp-uglify": "^1.5.3",
     "merge-stream": "^1.0.0",
     "minimist": "^1.2.0",
     "reserved-words": "^0.1.1",
-    "slug": "^0.9.1"
+    "slug": "^0.9.1",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
