@@ -14,7 +14,10 @@ var slug = require('slug');
 var reserved = require('reserved-words');
 var concatCss = require('gulp-concat-css');
 var stripCssComments = require('gulp-strip-css-comments');
-var gulpBrowser = require("gulp-browser");
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var streamify = require('gulp-streamify');
+
 
 var serverFiles = [
     './app.js',
@@ -77,20 +80,26 @@ gulp.task('ejs:watch', function () {
   gulp.watch('./views/**/*.ejs', ['ejs']);
 });
 
-gulp.task('js', function () {
-  gulp.src(['./public/js/src/genuine/header.js', './public/js/src/*.js', './public/js/src/genuine/footer.js'])
-    .pipe(concat('main.js'))
-    .pipe(gulpBrowser.browserify())
-    .pipe(gulp.dest('./public/js/'))
-    .pipe(livereload());
+gulp.task('concat', function(){
+  return gulp.src(['./public/js/src/genuine/header.js', './public/js/src/*.js', './public/js/src/genuine/footer.js'])
+  .pipe(concat('main.js'))
+  .pipe(gulp.dest('./public/js/'));
 });
 
-gulp.task('minify-js', function() {
-  gulp.src(['./public/js/src/genuine/header.js', './public/js/src/*.js', './public/js/src/genuine/footer.js'])
-    .pipe(concat('main.js'))
-    .pipe(gulpBrowser.browserify())
-    .pipe(stripDebug())
-    .pipe(uglify())
+gulp.task('js', ['concat'], function() {
+  return browserify('./public/js/main.js')
+   .bundle()
+   .pipe(source('main.js'))
+   .pipe(gulp.dest('./public/js/'))
+   .pipe(livereload());
+});
+
+gulp.task('minify-js', ['concat'], function() {
+  return browserify('./public/js/main.js')
+    .bundle()
+    .pipe(source('main.js'))
+    .pipe(streamify(uglify()))
+    .pipe(streamify(stripDebug()))
     .pipe(gulp.dest('./public/js'));
 });
 
