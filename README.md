@@ -1,4 +1,4 @@
-# Genuine.js 1.3.1
+# Genuine.js 1.3.2
 ![david](https://david-dm.org/codekonami/genuine.js.svg)
 ### Introduction
 
