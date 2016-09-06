@@ -6,7 +6,7 @@ env.hosts = 'YOUR IP ADDRESS'
 @task
 def prod():
     '''
-    This task is to deploy to production
+    Deploy to production
     '''
     print('Deploying to production')
     with settings(warn_only=True):
@@ -22,12 +22,13 @@ def prod():
             run("mv public/css/style.css.gz public/css/style.css")
             run("aws s3 cp /path/to/project/public/js/main.js s3://YOURS3BUCKET/js/main.js --acl public-read  --metadata-directive REPLACE --cache-control 'max-age=2592000, public' --content-encoding 'gzip'")
             run("aws s3 cp /path/to/project/public/css/style.css s3://YOURS3BUCKET/css/style.css --acl public-read  --metadata-directive REPLACE --cache-control 'max-age=2592000, public' --content-encoding 'gzip'")
+            run("aws s3 cp /path/to/project/public/img s3://YOURS3BUCKET/img --recursive  --acl public-read  --metadata-directive REPLACE --cache-control 'max-age=2592000, public'")
             run("pm2 restart PROJECTNAME")
 
 @task
 def deploy():
     '''
-    This task is to deploy
+    Deploy to staging
     '''
     print('Deploying')
     with settings(warn_only=True):
@@ -41,7 +42,7 @@ def deploy():
 @task
 def bigdeploy():
     '''
-    This task is to deploy
+    Deploy to staging with a `npm install`
     '''
     print('Deploying')
     with settings(warn_only=True):
@@ -56,7 +57,7 @@ def bigdeploy():
 @task
 def lite():
     '''
-    This task is to deploy
+    Deploy to staging without js, sass update
     '''
     print('Deploying')
     with settings(warn_only=True):

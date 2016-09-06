@@ -9,14 +9,16 @@ var config = {
   s3: {
     active: false,
     url: 'https://s3-eu-west-1.amazonaws.com/yourbucket'
-  }
+  },
+  responsiveSizes : [1200, 768, 480, 0]
 };
 
 config.public = {
   env: config.env,
   title: config.title,
   description: config.description,
-  host: config.host
+  host: config.host,
+  responsiveSizes: config.responsiveSizes
 }
 
 module.exports = config;

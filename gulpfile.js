@@ -27,7 +27,7 @@ var serverFiles = [
     './local-config.js',
     './socket.js',
     './utils/*',
-    './routes.js'
+    './routes/*'
 ];
 
 var args = minimist(process.argv.slice(2));
@@ -149,20 +149,20 @@ var generate = {
       'router.get(\'/'+slug+'\', pages.' + camelCaseName + ');',
       '/* GENUINE ROUTE */'].join('\n');
 
-    fs.readFile('./routes.js', 'utf8', function (err,data) {
+    fs.readFile('./routes/routes.js', 'utf8', function (err,data) {
       if (err) {
         return console.log(err);
       }
       var result = data.replace(/\/\* GENUINE ROUTE \*\//g, routeCode);
 
-      fs.writeFile('./routes.js', result, 'utf8', function (err) {
+      fs.writeFile('./routes/routes.js', result, 'utf8', function (err) {
          if (err) return console.log(err);
       });
     });
   },
   routeType : function(type){
     var includeRender = [
-      type + " = require('./controllers/"+type+"'),",
+      type + " = require('../controllers/"+type+"'),",
       "/* GENUINE INCLUDE */",
     ""].join('\n');
     var routesRender = [
@@ -171,14 +171,14 @@ var generate = {
       "/* GENUINE ROUTE */",
     ""].join('\n');
 
-    fs.readFile('./routes.js', 'utf8', function (err,data) {
+    fs.readFile('./routes/routes.js', 'utf8', function (err,data) {
       if (err) {
         return console.log(err);
       }
       var result = data.replace(/\/\* GENUINE ROUTE \*\//g, routesRender);
       result = result.replace(/\/\* GENUINE INCLUDE \*\//g, includeRender);
 
-      fs.writeFile('./routes.js', result, 'utf8', function (err) {
+      fs.writeFile('./routes/routes.js', result, 'utf8', function (err) {
          if (err) return console.log(err);
       });
     });
