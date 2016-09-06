@@ -35,8 +35,6 @@ common: {
         $(this).next('.toggleContent').show('slow');
         $('.toggleTitle').not(this).removeClass('open');
         $('.toggleTitle').not(this).next('.toggleContent').hide('slow');
-        //$('.polyfill').objectFitPolyfill();
       });
-      //$('.polyfill').objectFitPolyfill();
     }
   },
