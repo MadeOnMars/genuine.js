@@ -33,4 +33,7 @@ app.use(bodyParser.json());
 app.use(session({ secret: config.secret, resave: true, saveUninitialized: true }));
 app.use(require('./utils/lang'));
 app.use(function(req,res,next){req.io = io;app.locals.lang = req.lang;next();});
-app.use(require('./routes'));
+app.use(require('./routes/routes'));
+app.use(require('./routes/301'));
+app.use(require('./routes/pages'));
+app.use(require('./routes/errors'));
