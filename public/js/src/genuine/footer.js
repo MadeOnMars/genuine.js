@@ -77,3 +77,5 @@ var onResizeFunctions = {
     console.log('Common Responsive Resize', w, h);
   }
 };
+
+onResizeFunctions.common($(window).width(),$(window).height());
