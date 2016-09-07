@@ -1,8 +1,8 @@
-# Genuine.js 1.3.3
+# Genuine.js 1.3.4
 ![david](https://david-dm.org/codekonami/genuine.js.svg)
 ### Introduction
 
-Genuine.js is a framework for Front End developer to start projects with
+Genuine.js is a framework to start projects with
 the rights tools.
 
 ### Installation
