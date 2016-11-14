@@ -1,0 +1,4 @@
+<link rel="alternate" href="<%=locals.config.host%><%=data.url%>" hreflang="<%=locals.config.locales[0]%>" />
+<% for(var i=1; i<locals.config.locales.length; i++) {%>
+   <link rel="alternate" href="<%=locals.config.host%>/<%=locals.config.locales[i]%><%=data.url%>" hreflang="<%=locals.config.locales[i]%>" />
+<% } %>
