@@ -1,7 +1,7 @@
 <head>
   <meta charset="utf-8">
   <title>
-    <%= data.title || locals.config.title %>
+    <%- partial('elements/title') %>
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>
@@ -13,6 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,700,700italic,600italic,600'>
   <%}%>
-  <%- partial('elements/hreflang') %>
+
   <%- partial('elements/socials-meta') %>
 </head>

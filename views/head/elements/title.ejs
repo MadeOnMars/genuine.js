@@ -1,0 +1,9 @@
+<%
+  if(data.title && typeof data.title == 'object'){
+    %><%=data.title[lang]%><%
+  } else if(data.title && typeof data.title == 'string'){
+    %><%=data.title%><%
+  } else {
+    %><%=locals.config.title[lang]%><%
+  }
+%>
