@@ -1,0 +1,17 @@
+<meta name="description" content="<%= data.description || locals.config.description %>">
+<meta property="og:url" content="<%= locals.config.host %><%= data.url || '' %>">
+<meta property="og:site_name" content="<%= data.description || locals.config.description %>">
+<meta property="og:title" content="<%= data.title || locals.config.title %>">
+<meta property="og:description" content="<%= data.description || locals.config.description %>">
+<meta property="og:image" content="<%= (data.shareImg) || (locals.config.host + '/img/logo.png') %>">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="twitter:site" content="Genuine">
+<meta property="twitter:creator" content="Genuine">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="<%= data.title || locals.config.title %>">
+<meta property="twitter:description" content="<%= data.description || locals.config.description %>">
+<meta property="twitter:image:src" content="<%= (data.shareImg) || (locals.config.host + '/img/logo.png') %>">
+<meta property="twitter:image:width" content="1200">
+<meta property="twitter:image:height" content="630">

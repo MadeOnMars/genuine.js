@@ -16,6 +16,7 @@ exports.index = function(req, res) {
   data.action = 'index';
   data.fruit = req.session.fruit || i18n.__('Apple');
   req.session.fruit = i18n.__('Banana');
+  data.url = req.url;
   res.render('home', {data:data});
 },
 exports.page = function(req, res) {
@@ -28,5 +29,6 @@ exports.page = function(req, res) {
   data.action = page.camel;
   data.title = page.title;
   data.page = page;
+  data.url = req.url;
   res.render('pages/page', {data:data});
 }

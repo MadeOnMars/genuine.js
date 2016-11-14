@@ -15,6 +15,7 @@ var config = {
 
 config.public = {
   env: config.env,
+  locales: config.locales,
   title: config.title,
   description: config.description,
   host: config.host,
