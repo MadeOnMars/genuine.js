@@ -32,7 +32,7 @@ exports.page = function(req, res) {
     return;
   }
   data.action = page.camel;
-  if(page.title == 'object'){
+  if(typeof page.title == 'object'){
     data.title = page.title[req.lang] || page.title[0];
   } else {
     data.title = page.title;
