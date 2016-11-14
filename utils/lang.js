@@ -1,29 +1,22 @@
-var express = require('express'),
-    router = express.Router(),
-    i18n = require('i18n-2'),
-    acceptLanguage = require('accept-language'),
-    config = require('../local-config');
+var config = require('../local-config')
+    acceptLanguage = require('accept-language');
 
-router.use(function(req, res, next) {
-  if(req.query.lang){
-    if(config.locales.indexOf(req.query.lang) != -1){
-        req.session.locale = req.query.lang;
-        req.i18n.setLocale(req.query.lang);
-    }
-  } else if(req.session.locale){
-    req.i18n.setLocale(req.session.locale);
-  } else {
-    // No default langage, we check the accept-language headers
-    if(req.headers['accept-language']){
-      var preferedLang = acceptLanguage.get(req.headers['accept-language']);
-      if(preferedLang){
-        req.session.locale = preferedLang;
-        req.i18n.setLocale(preferedLang);
+/*
+** firstVisit will redirect the user the correct i18n the acceptLanguage
+** is different than the default language
+*/
+var firstVisit = function(req, res, next){
+  if(!req.session.prefLang && req.headers['accept-language']){
+    var preferedLang = acceptLanguage.get(req.headers['accept-language']);
+    if(preferedLang && config.locales.indexOf(preferedLang) != -1){
+      req.session.prefLang = preferedLang;
+      if(preferedLang != config.locales[0] && req.url.length < 4){
+        res.redirect('/'+preferedLang);
+        return;
       }
     }
   }
-  req.lang = req.i18n.getLocale();
   next();
-});
+}
 
-module.exports = router;
+module.exports.firstVisit = firstVisit;

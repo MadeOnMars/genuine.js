@@ -10,6 +10,13 @@ var express = require('express'),
     acceptLanguage = require('accept-language'),
     socket = require('./socket'),
     app     = express(),
+    router = {
+      pages: require('./routes/pages'),
+      routes: require('./routes/routes'),
+      errors: require('./routes/errors'),
+      redirect: require('./routes/301')
+    };
+    lang = require('./utils/lang'),
     io = require('socket.io').listen(app.listen(config.port, function(){
       console.log('Genuine.js ' + pkg.version + ' is now on http://localhost:' + config.port);
     }));
@@ -31,9 +38,21 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(session({ secret: config.secret, resave: true, saveUninitialized: true }));
-app.use(require('./utils/lang'));
-app.use(function(req,res,next){req.io = io;app.locals.lang = req.lang;next();});
-app.use(require('./routes/routes'));
-app.use(require('./routes/301'));
-app.use(require('./routes/pages'));
-app.use(require('./routes/errors'));
+app.use(function(req,res,next){req.io = io;next();});
+
+app.use(router.redirect);
+
+app.use(lang.firstVisit);
+
+for(var i=1;i<config.locales.length;i++){
+  app.use('/'+config.locales[i], router.routes);
+  app.use('/'+config.locales[i], router.pages);
+}
+app.use(router.routes);
+app.use(router.pages);
+
+for(var i=1;i<config.locales.length;i++){
+  app.use('/'+config.locales[i], router.errors);
+}
+
+app.use(router.errors);
