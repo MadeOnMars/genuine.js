@@ -43,6 +43,7 @@ app.use(function(req,res,next){req.io = io;next();});
 app.use(router.redirect);
 
 app.use(lang.firstVisit);
+app.use(lang.setLang);
 
 for(var i=1;i<config.locales.length;i++){
   app.use('/'+config.locales[i], router.routes);

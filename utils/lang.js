@@ -1,4 +1,5 @@
-var config = require('../local-config')
+var config = require('../local-config'),
+    locals = require('../utils/locals'),
     acceptLanguage = require('accept-language');
 
 /*
@@ -19,4 +20,24 @@ var firstVisit = function(req, res, next){
   next();
 }
 
+/*
+** setLang parsed the url to return the current language
+*/
+var setLang = function(req, res, next){
+  var lang = config.locales[0];
+  var parsedUrl = req.url.split('/');
+  for(var i=0;i<config.locales.length;i++){
+    if(parsedUrl.indexOf(config.locales[i]) != -1){
+      lang = config.locales[i];
+      break;
+    }
+  }
+  req.i18n.setLocale(lang);
+  req.lang = lang;
+  locals.lang = lang;
+
+  next();
+}
+
 module.exports.firstVisit = firstVisit;
+module.exports.setLang = setLang;

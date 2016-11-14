@@ -32,7 +32,7 @@ var serverFiles = [
 
 var args = minimist(process.argv.slice(2));
 
-gulp.task('default', ['sass', 'js', 'sass:watch', 'ejs:watch', 'js:watch']);
+gulp.task('default', ['server']);
 gulp.task('prod', ['minify-css', 'minify-js']);
 gulp.task('server', ['sass', 'js', 'server:start', 'sass:watch', 'ejs:watch', 'js:watch'], function() {
     function restart( file ) {
@@ -115,7 +115,7 @@ gulp.task( 'server:start', function() {
       stats = fs.lstatSync('./local-config.js');
     }
     catch (e) {
-      fs.createReadStream('./local-config-sample.js').pipe(fs.createWriteStream('local-config.js'));
+      console.log('Have you set your local-config.js ? Do a \n `cp local-config-sample.js local-config.js`');
     }
     server.listen( { path: './app.js' }, function(err){
         if(err){console.log('********************\nDo a \n`npm install`\n********************'); return;}
