@@ -13,7 +13,7 @@ var config = {
     fr: 'Un framework Node.js super léger pour faire de superbes sites.',
     es: 'Un framework Node.js muy ligero para hacer sitios rápidamente.'
   },
-  host: 'http://locahost:3000',
+  host: 'http://localhost:3000',
   s3: {
     active: false,
     url: 'https://s3-eu-west-1.amazonaws.com/yourbucket'
