@@ -4,12 +4,13 @@ var _ = require('lodash');
 var i18n = new (require('i18n-2'))({
     locales: config.locales
 });
-var data = {};
 
-data.controller = 'pages';
+var controller = 'pages';
 
 /* GENUINE */
 exports.index = function(req, res) {
+  var data = {};
+  data.controller = controller;
   i18n.setLocale(req.lang);
   data.title = config.title[req.lang];
   data.description = config.description[req.lang];
@@ -25,6 +26,8 @@ exports.index = function(req, res) {
   res.render('home', {data:data});
 },
 exports.page = function(req, res) {
+  var data = {};
+  data.controller = controller;
   i18n.setLocale(req.lang);
   var page = _.find(pages, {slug: req.params.slug});
   if(page === undefined){
