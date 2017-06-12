@@ -1,25 +1,18 @@
-var express = require('express'),
-    session = require('express-session'),
-    bodyParser = require('body-parser'),
-    compression = require('compression'),
-    config = require('./local-config'),
-    pkg = require ('./package.json'),
-    engine = require('ejs-mate'),
-    _ = require('lodash'),
-    i18n = require('i18n-2'),
-    acceptLanguage = require('accept-language'),
-    socket = require('./socket'),
-    app     = express(),
-    router = {
-      pages: require('./routes/pages'),
-      routes: require('./routes/routes'),
-      errors: require('./routes/errors'),
-      redirect: require('./routes/301')
-    };
-    lang = require('./utils/lang'),
-    io = require('socket.io').listen(app.listen(config.port, function(){
-      console.log('Genuine.js ' + pkg.version + ' is now on http://localhost:' + config.port);
-    }));
+const express = require('express');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const compression = require('compression');
+const config = require('./local-config');
+const pkg = require ('./package.json');
+const engine = require('ejs-mate');
+const i18n = require('i18n-2');
+const acceptLanguage = require('accept-language');
+const socket = require('./socket');
+const app = express();
+const router = require('./routes');
+const lang = require('./utils/lang');
+const http = require('http').Server(app);
+const io = require('socket.io').listen(http);
 
 socket.listen(io);
 acceptLanguage.languages(config.locales);
@@ -37,23 +30,35 @@ if(config.env == 'prod'){
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(session({ secret: config.secret, resave: true, saveUninitialized: true }));
-app.use(function(req,res,next){req.io = io;next();});
+app.use(session({
+    secret: config.secret,
+    resave: true,
+    saveUninitialized: true
+  })
+);
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
 
 app.use(router.redirect);
 
 app.use(lang.firstVisit);
 app.use(lang.setLang);
 
-for(var i=1;i<config.locales.length;i++){
-  app.use('/'+config.locales[i], router.routes);
-  app.use('/'+config.locales[i], router.pages);
+for(let i = 1; i < config.locales.length; i++) {
+  app.use('/' + config.locales[i], router.routes);
+  app.use('/' + config.locales[i], router.pages);
 }
 app.use(router.routes);
 app.use(router.pages);
 
-for(var i=1;i<config.locales.length;i++){
-  app.use('/'+config.locales[i], router.errors);
+for(let i = 1; i < config.locales.length; i++) {
+  app.use('/' + config.locales[i], router.errors);
 }
 
 app.use(router.errors);
+
+http.listen(config.port, () => {
+  console.log(`Genuine.js ${pkg.version} on http://localhost:${config.port}`);
+});

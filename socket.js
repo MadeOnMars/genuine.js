@@ -1,5 +1,5 @@
-var listen = function(io){
-  io.on('connection', function(socket){
+const listen = (io) => {
+  io.on('connection', (socket) => {
     // Example
     /*
     socket.on('status', function(data){

@@ -1,7 +1,7 @@
-var express = require('express'),
-    pages = require('../controllers/pages'),
-    router = express.Router();
+const express = require('express');
+const pages = require('../controllers/pages');
+const router = express.Router();
 
 router.get('/:slug', pages.page);
 
-module.exports = router
+module.exports = router;

@@ -1,14 +1,20 @@
-var express = require('express'),
-    config = require('../local-config'),
-    router = express.Router();
+const express = require('express');
+const config = require('../local-config');
+const router = express.Router();
 
-router.use(function(req, res, next) {
-  res.status(404).render('404', {data:{}});
+router.use((req, res, next) => {
+  res.status(404).render('404', {
+    data: {}
+  });
 });
 
-router.use(function(err, req, res, next) {
+router.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).render('error', { data: {err: err}});
+  res.status(500).render('error', {
+    data: {
+      err: err
+    }
+  });
 });
 
 module.exports = router

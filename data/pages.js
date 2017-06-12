@@ -1,4 +1,4 @@
-var pages = [
+const pages = [
 {
 "title": "Mentions légales",
 "slug": "mentions-legales",

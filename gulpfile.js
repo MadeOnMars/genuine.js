@@ -1,25 +1,23 @@
-'use strict';
-var gulp = require('gulp');
-var merge = require('merge-stream');
-var cleanCSS = require('gulp-clean-css');
-var uglify = require('gulp-uglify');
-var stripDebug = require('gulp-strip-debug');
-var sass = require('gulp-sass');
-var concat = require('gulp-concat');
-var livereload = require('gulp-livereload');
-var server = require( 'gulp-develop-server' );
-var minimist = require('minimist');
-var fs = require('fs');
-var slug = require('slug');
-var reserved = require('reserved-words');
-var concatCss = require('gulp-concat-css');
-var stripCssComments = require('gulp-strip-css-comments');
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var streamify = require('gulp-streamify');
+const gulp = require('gulp');
+const merge = require('merge-stream');
+const cleanCSS = require('gulp-clean-css');
+const uglify = require('gulp-uglify');
+const stripDebug = require('gulp-strip-debug');
+const sass = require('gulp-sass');
+const concat = require('gulp-concat');
+const livereload = require('gulp-livereload');
+const server = require( 'gulp-develop-server' );
+const minimist = require('minimist');
+const fs = require('fs');
+const slug = require('slug');
+const reserved = require('reserved-words');
+const concatCss = require('gulp-concat-css');
+const stripCssComments = require('gulp-strip-css-comments');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
+const streamify = require('gulp-streamify');
 
-
-var serverFiles = [
+const serverFiles = [
     './app.js',
     './controllers/*.js',
     './data/*.js',
@@ -30,7 +28,7 @@ var serverFiles = [
     './routes/*'
 ];
 
-var args = minimist(process.argv.slice(2));
+const args = minimist(process.argv.slice(2));
 
 gulp.task('default', ['server']);
 gulp.task('prod', ['minify-css', 'minify-js']);
