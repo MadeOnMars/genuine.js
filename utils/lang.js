@@ -24,7 +24,7 @@ const firstVisit = (req, res, next) => {
 ** setLang parsed the url to return the current language
 */
 const setLang = (req, res, next) => {
-  const lang = config.locales[0];
+  let lang = config.locales[0];
   const parsedUrl = req.url.split('/');
   for(let i=0 ; i < config.locales.length; i++) {
     if (parsedUrl.indexOf(config.locales[i]) !== -1) {
