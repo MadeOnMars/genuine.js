@@ -3,8 +3,8 @@ pages: {
     console.log("pages:init");
     // controller-wide code
   },
-mentionLegales: function() {
-  console.log("pages:mentionLegales");
+  legalNotice: function() {
+  console.log("pages:legalNotice");
   // controller-wide code
   },
   /* GENUINE */

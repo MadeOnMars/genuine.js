@@ -4,8 +4,6 @@ const fullUrl = require('../utils/fullUrl');
 const redirect = require('../utils/redirect');
 const _ = require('lodash');
 
-const controller = 'pages';
-
 /* GENUINE */
 exports.index = (req, res) => {
   const data = {

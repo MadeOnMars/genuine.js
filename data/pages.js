@@ -1,9 +1,9 @@
 const pages = [
 {
-"title": "Mentions légales",
-"slug": "mentions-legales",
-"partial": "mentions-legales",
-"camel": "mentionsLegales"
+"title": "Legal notice",
+"slug": "legal-notice",
+"partial": "legal-notice",
+"camel": "legalNotice"
 },
 /* GENUINE DATA */
 ];
