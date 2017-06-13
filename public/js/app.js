@@ -18,6 +18,9 @@ const action = body.getAttribute('data-action');
 $(document).ready(() => {
   genuine(app, controller, action);
   onResizeFunctions.init($(window).width(), $(window).height());
+  socket.on('message', (data) => {
+    console.log(data);
+  });
 });
 
 $(window).resize(function() {
