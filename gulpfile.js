@@ -84,8 +84,9 @@ gulp.task('concat', function(){
   .pipe(gulp.dest('./public/js/'));
 });
 
-gulp.task('js', ['concat'], function() {
-  return browserify('./public/js/main.js')
+// gulp.task('js', ['concat'], function() {
+gulp.task('js', function() {
+  return browserify('./public/js/app.js')
     //.transform("babelify", {presets: ["es2015"]})
     .bundle()
     .pipe(source('main.js'))
@@ -105,7 +106,7 @@ gulp.task('minify-js', ['concat'], function() {
 
 gulp.task('js:watch', function () {
   livereload.listen();
-  gulp.watch('./public/js/src/**/*.js', ['js']);
+  gulp.watch(['./public/js/src/*.js', './public/js/vendors/genuine/*.js', './public/js/app.js'], ['js']);
 });
 
 gulp.task( 'server:start', function() {

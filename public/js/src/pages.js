@@ -1,20 +1,24 @@
-pages: {
-  init: function() {
+const $ = require('jquery');
+const Swiper = require('swiper');
+const jQueryBridget = require('jquery-bridget');
+const Masonry = require('masonry-layout');
+
+// make Masonry a jQuery plugin
+jQueryBridget( 'masonry', Masonry, $ );
+
+const pages = {
+  init: () => {
     console.log("pages:init");
     // controller-wide code
   },
-  legalNotice: function() {
+  legalNotice: () => {
     console.log("pages:legalNotice");
     // controller-wide code
   },
   /* GENUINE */
-  index: function() {
+  index: () => {
     console.log("pages:index");
     // action-specific code
-
-    onResizeFunctions.index = function(w,h){
-      console.log('Do something specific for this page on resize', w, h);
-    }
 
     var mySwiper1 = new Swiper ('.slidehome', {
       direction: 'horizontal',
@@ -38,4 +42,6 @@ pages: {
       percentPosition: true
     });
   }
-},
+};
+
+module.exports = pages;
