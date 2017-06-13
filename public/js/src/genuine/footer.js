@@ -1,7 +1,7 @@
 
 };
 
-UTIL = {
+global.UTIL = {
   exec: function( controller, action ) {
     var ns = GENUINE,
         action = ( action === undefined ) ? "init" : action;

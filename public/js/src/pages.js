@@ -4,8 +4,8 @@ pages: {
     // controller-wide code
   },
   legalNotice: function() {
-  console.log("pages:legalNotice");
-  // controller-wide code
+    console.log("pages:legalNotice");
+    // controller-wide code
   },
   /* GENUINE */
   index: function() {

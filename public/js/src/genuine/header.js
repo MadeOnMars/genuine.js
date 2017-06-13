@@ -1,12 +1,12 @@
-var $ = require('jquery');
-var Swiper = require('swiper');
+global.$ = require('jquery');
+const Swiper = require('swiper');
 
-var jQueryBridget = require('jquery-bridget');
-var Masonry = require('masonry-layout');
+const jQueryBridget = require('jquery-bridget');
+const Masonry = require('masonry-layout');
 
-var mustFit = require('must-fit');
+const mustFit = require('must-fit');
 
 // make Masonry a jQuery plugin
 jQueryBridget( 'masonry', Masonry, $ );
 
-GENUINE = {
+global.GENUINE = {

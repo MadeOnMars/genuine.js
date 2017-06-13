@@ -25,7 +25,7 @@ const serverFiles = [
     './local-config.js',
     './socket.js',
     './utils/*',
-    './routes/*'
+    './routes/**/*.js'
 ];
 
 const args = minimist(process.argv.slice(2));
@@ -86,14 +86,16 @@ gulp.task('concat', function(){
 
 gulp.task('js', ['concat'], function() {
   return browserify('./public/js/main.js')
-   .bundle()
-   .pipe(source('main.js'))
-   .pipe(gulp.dest('./public/js/'))
-   .pipe(livereload());
+    //.transform("babelify", {presets: ["es2015"]})
+    .bundle()
+    .pipe(source('main.js'))
+    .pipe(gulp.dest('./public/js/'))
+    .pipe(livereload());
 });
 
 gulp.task('minify-js', ['concat'], function() {
   return browserify('./public/js/main.js')
+    .transform("babelify", {presets: ["es2015"]})
     .bundle()
     .pipe(source('main.js'))
     .pipe(streamify(uglify()))
