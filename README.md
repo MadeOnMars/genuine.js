@@ -1,9 +1,10 @@
-# Genuine.js 1.3.5
+Genuine.js
+===========
+**Version 2.0.0**
 ![david](https://david-dm.org/codekonami/genuine.js.svg)
 ### Introduction
 
-Genuine.js is a framework to start projects with
-the rights tools.
+Genuine.js is a framework to start projects with the rights tools.
 
 ### Installation
 
@@ -11,13 +12,13 @@ the rights tools.
 You can launch the app directly by doing a **node app.js** but in order to release all the
 power of **Genuine.js** you'd better installed **gulp** as well like so
 
-```bash
+```sh
 npm install --global gulp
 ```
 
 Then to install the dependencies do :
 
-```bash
+```sh
 npm install
 ```
 
@@ -25,13 +26,13 @@ npm install
 
 First you need to create a local-config.js file to declare your local ENV vars.
 
-```bash
+```sh
 cp local-config-sample.js local-config.js
 ```
 
 Now you can launch the project like so
-```bash
-gulp server
+```sh
+gulp
 ```
 
 You can browse to http://localhost:3000 and see the result
@@ -93,6 +94,10 @@ It seems there is an issue on Chrome see here :
 https://github.com/livereload/livereload-extensions/issues/26
 
 The solution is actually to open the developer mode.
+
+### Changelog
+
+- 2.0.0 : ES6 compatibility and refactoring a lot
 
 ### TODO
 
