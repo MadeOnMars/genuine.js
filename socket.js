@@ -1,5 +1,9 @@
-var listen = function(io){
-  io.on('connection', function(socket){
+const listen = (io) => {
+  io.on('connection', (socket) => {
+    socket.emit('message', {
+      status: 'OK',
+      msg: 'Hello World'
+    });
     // Example
     /*
     socket.on('status', function(data){
