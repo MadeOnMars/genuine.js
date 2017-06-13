@@ -33,12 +33,12 @@ const args = minimist(process.argv.slice(2));
 gulp.task('default', ['server']);
 gulp.task('prod', ['minify-css', 'minify-js']);
 gulp.task('server', ['sass', 'js', 'server:start', 'sass:watch', 'ejs:watch', 'js:watch'], function() {
-    function restart( file ) {
-        server.changed( function( error ) {
-            if( ! error ) livereload.changed( file.path );
-        });
-    }
-    gulp.watch( serverFiles ).on( 'change', restart );
+  function restart(file) {
+    server.changed( function( error ) {
+      if( ! error ) livereload.changed( file.path );
+    });
+  }
+  gulp.watch( serverFiles ).on( 'change', restart );
 });
 
 gulp.task('sass', function () {
@@ -80,7 +80,6 @@ gulp.task('ejs:watch', function () {
 
 gulp.task('js', function() {
   return browserify('./public/js/app.js')
-    //.transform("babelify", {presets: ["es2015"]})
     .bundle()
     .pipe(source('main.js'))
     .pipe(gulp.dest('./public/js/'))

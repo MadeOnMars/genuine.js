@@ -101,8 +101,8 @@ The solution is actually to open the developer mode.
 
 ### TODO
 
+- Add new gulp command for script
 - Find a way to manage css dependencies
 - Generate Nav automatically
-- Automatic plan du site
 - Add production README explanation
 - Add Dockerfile
