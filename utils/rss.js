@@ -1,11 +1,11 @@
-var nodeRss = require('rss');
-var moment = require('moment');
-var config = require('../local-config');
+const nodeRss = require('rss');
+const moment = require('moment');
+const config = require('../local-config');
 
 moment.locale('en');
 
-rss = function(req, res){
-  var feed = new nodeRss({
+const rss = (req, res) => {
+  const feed = new nodeRss({
     title: config.title,
     description: config.description,
     feed_url: config.host + '/rss',

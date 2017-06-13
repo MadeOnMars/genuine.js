@@ -1,9 +1,9 @@
-var express = require('express'),
-    sitemap = require('../utils/sitemap'),
-    rss = require('../utils/rss'),
-    robots = require('../utils/robots'),
-    config = require('../local-config'),
-    router = express.Router(),
+const express = require('express');
+const sitemap = require('../utils/sitemap');
+const rss = require('../utils/rss');
+const robots = require('../utils/robots');
+const config = require('../local-config');
+const router = express.Router();
 /* GENUINE INCLUDE */
 
     pages = require('../controllers/pages');
@@ -19,4 +19,4 @@ router.get('/sitemap.xml', sitemap);
 router.get('/rss', rss);
 router.get('/rss.xml', rss);
 
-module.exports = router
+module.exports = router;
